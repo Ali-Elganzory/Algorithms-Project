@@ -12,6 +12,7 @@ class CutStickView extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size sz = MediaQuery.of(context).size;
     final double sh = sz.height;
+    final double sw = sz.width;
     final double verticalPadding = 0.03 * sh;
     final double sidePadding = 20;
 
@@ -27,14 +28,42 @@ class CutStickView extends StatelessWidget {
           horizontal: sidePadding,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "The minimum number of cuts required if you have a stick n unit long needs to be cut into n unit pieces.",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline5,
+            Selector<CutStickController, int>(
+              selector: (_, con) => con.minCuts,
+              builder: (_, minCuts, __) => Text(
+                "The minimum number of cuts required to cut a stick ${context.read<CutStickController>().stickLength} units long into 1 unit pieces is\n\n${minCuts < 0 ? "" : "$minCuts"}",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
             SizedBox(height: verticalPadding),
+            Expanded(
+              child: Selector<CutStickController, List<int>>(
+                  selector: (_, con) => con.stick,
+                  builder: (_, stick, __) {
+                    double unitLength = 0.8 *
+                        sw /
+                        context.read<CutStickController>().stickLength;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        for (int stickPart in stick)
+                          Column(
+                            children: [
+                              Text("$stickPart"),
+                              Container(
+                                height: 30,
+                                width: stickPart * unitLength,
+                                margin: const EdgeInsets.symmetric(vertical: 6),
+                                color: Colors.purple,
+                              ),
+                            ],
+                          ),
+                      ],
+                    );
+                  }),
+            ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -60,26 +89,17 @@ class CutStickView extends StatelessWidget {
               ],
             ),
             SizedBox(height: verticalPadding),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 context.read<CutStickController>().findMinimumCuts();
               },
-              child: Text(
-                "Solve",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5!
-                    .copyWith(color: Theme.of(context).primaryColor),
+              child: Text("Solve"),
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                minimumSize: Size(200, 40),
               ),
             ),
-            SizedBox(height: verticalPadding),
-            Selector<CutStickController, int>(
-              selector: (_, con) => con.minCuts,
-              builder: (_, minCuts, __) => Text(
-                minCuts < 0 ? "" : "$minCuts",
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ),
+            SizedBox(height: 2 * verticalPadding),
           ],
         ),
       ),
