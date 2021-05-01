@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:visual_algorithms/Views/home_view/home_view.dart';
-import 'package:visual_algorithms/Views/cut_stick/cut_stick_view.dart';
+import 'package:algorithms_project/Views/home_view/home_view.dart';
+import 'package:algorithms_project/Views/cut_stick/cut_stick_view.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {

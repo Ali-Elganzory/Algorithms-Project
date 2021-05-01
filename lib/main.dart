@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import 'router.dart' as router;
 
-import 'package:visual_algorithms/Views/home_view/home_view.dart';
-import 'package:visual_algorithms/Controllers/cut_stick_controller.dart';
+import 'package:algorithms_project/Views/home_view/home_view.dart';
+import 'package:algorithms_project/Controllers/cut_stick_controller.dart';
 
 void main() {
   runApp(App());

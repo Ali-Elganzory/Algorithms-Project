@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:visual_algorithms/Controllers/cut_stick_controller.dart';
+import 'package:algorithms_project/Controllers/cut_stick_controller.dart';
 
 class CutStickView extends StatelessWidget {
   static const String routeName = "/cut_stick";

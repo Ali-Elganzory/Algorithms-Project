@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
-import 'package:visual_algorithms/Views/cut_stick/cut_stick_view.dart';
+import 'package:algorithms_project/Views/cut_stick/cut_stick_view.dart';
 
 class HomeView extends StatelessWidget {
   static const String routeName = "/home";
