@@ -17,7 +17,7 @@ dependencies:
   provider: ^5.0.0
 
   stack_canvas:
-    path: D:/Flutter/Flutter_Projects/stack_canvas
+    path: lib/Third_Party/stack_canvas
 
 dev_dependencies:
   flutter_test:
