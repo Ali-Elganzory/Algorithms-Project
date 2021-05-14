@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 import 'package:algorithms_project/Views/cut_stick/cut_stick_view.dart';
+import 'package:algorithms_project/Views/growing_triangles/growing_triangles_view.dart';
 
 class HomeView extends StatelessWidget {
   static const String routeName = "/home";
@@ -57,11 +56,10 @@ class HomeView extends StatelessWidget {
             ),
             SizedBox(height: verticalPadding),
             ElevatedButton(
-              onPressed: null,
-              /*() {
-                Navigator.of(context).pushNamed(CutStickView.routeName);
-              },*/
-              child: Text("Task 4: Brute Force"),
+              onPressed: () {
+                Navigator.of(context).pushNamed(GrowingTrianglesView.routeName);
+              },
+              child: Text("Task 4: Grow Triangles"),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(300, 46),
               ),

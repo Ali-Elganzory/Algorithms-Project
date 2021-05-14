@@ -4,20 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class CutStickController with ChangeNotifier {
-  TextEditingController _unitsController = TextEditingController();
-  TextEditingController get unitsController => _unitsController;
+  TextEditingController _unitsTextController = TextEditingController();
+  TextEditingController get unitsTextController => _unitsTextController;
 
   // State
-  int _stickLength = 1;
   int _minCuts = 0;
   List<int> _stick = [1];
-
-  // Getters & Seeters
-  int get stickLength => _stickLength;
-  set stickLength(int v) {
-    _stickLength = v;
-    notifyListeners();
-  }
 
   int get minCuts => _minCuts;
   set minCuts(int v) {
@@ -31,14 +23,19 @@ class CutStickController with ChangeNotifier {
     notifyListeners();
   }
 
+  bool _isCuttingStick = false;
+  bool get isCuttingStick => _isCuttingStick;
+  set isCuttingStick(bool v) {
+    _isCuttingStick = v;
+    notifyListeners();
+  }
+
+  int get stickLength => int.tryParse(_unitsTextController.text) ?? 1;
+
   // Greedy solution for the minimum cuts
   int findMinimumCuts() {
-    {
-      // Extract user input as an [int]
-      stickLength = int.tryParse(_unitsController.text) ?? 1;
-      // Calculate minimum number of cuts
-      minCuts = (log(stickLength) / log(2)).ceil();
-    }
+    // Calculate minimum number of cuts
+    minCuts = (log(stickLength) / log(2)).ceil();
 
     // For simulation purposes
     findMinimumCutsSimulated();
@@ -46,6 +43,8 @@ class CutStickController with ChangeNotifier {
   }
 
   Future<void> findMinimumCutsSimulated() async {
+    isCuttingStick = true;
+
     stick = [stickLength];
     for (int i = minCuts; i > 0; i--) {
       await Future.delayed(Duration(milliseconds: 500));
@@ -55,10 +54,12 @@ class CutStickController with ChangeNotifier {
               : [stickPart ~/ 2 + stickPart % 2, stickPart ~/ 2])
           .toList();
     }
+
+    isCuttingStick = false;
   }
 
   void dispose() {
     super.dispose();
-    _unitsController.dispose();
+    _unitsTextController.dispose();
   }
 }
