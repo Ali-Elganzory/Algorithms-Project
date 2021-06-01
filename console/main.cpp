@@ -42,7 +42,14 @@ int main()
 // Task 1
 int minimumCuts(int n)
 {
-    return ceil(log2(n));
+    int minCuts = 0;
+    while (n >= 2)
+    {
+        n /= 2;
+        minCuts++;
+    }
+    minCuts += (n > 0 ? 1 : 0);
+    return minCuts;
 }
 
 void task1()
