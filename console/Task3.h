@@ -18,12 +18,12 @@ public:
 	// toggle three lamps states (before, current, after)
 	void toggle()
 	{
-		this->after->isToggeled = not(this->after->isToggeled);
-		this->before->isToggeled = not(this->before->isToggeled);
-		this->after->isOn = not(this->after->isOn);
-		this->before->isOn = not(this->before->isOn);
-		this->isOn = not(this->isOn);
-		this->isToggeled = not(this->isToggeled);
+		this->after->isToggeled = ! this->after->isToggeled;
+		this->before->isToggeled = ! this->before->isToggeled;
+		this->after->isOn = ! this->after->isOn;
+		this->before->isOn = ! this->before->isOn;
+		this->isOn = ! this->isOn;
+		this->isToggeled = ! this->isToggeled;
 	}
 
 	// check if we can use one switch instead of three switches 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Task3.h"
+
 using namespace std;
 
 // Utilities prototype
