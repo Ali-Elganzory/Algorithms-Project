@@ -19,6 +19,8 @@ int minimumToggles(Circle* c);
 void task4();
 // Task 5
 void task5();
+int findFakeCoin(int coinWeight, int coins[], int s, int e);
+int counter = 0;
 // Task 6
 void task6();
 
@@ -153,7 +155,58 @@ void task4()
 }
 
 // Task 5
-void task5() {}
+void task5()
+{
+    int n, coinWeight, fakeIndex, fakeWeight;
+    // prompt the user to enter the number of coins
+    cout << "Enter the number of coins: " << "\n";
+    cin >> n;
+
+    // prompt the user to enter the weight of the coin
+    cout << "Enter the weight of the coin" << endl;
+    cin >> coinWeight;
+
+    // creating an array and initalzing it with a default value (the weight of the coin)
+    int* coins = new int[n];
+    std::fill_n(coins, n, coinWeight);
+
+    // taking the index of fake coin and its weight
+    cout << "Enter the index of the fake coin and its weight:" << endl;
+    cin >> fakeIndex >> fakeWeight;
+    coins[fakeIndex] = fakeWeight;
+
+    cout << "The coins listed sequentially: ";
+    for (int i = 0; i < n; i++) {
+        cout << coins[i] << " | ";
+    }
+
+    cout << endl << "The minimum number of weighings: is " << findFakeCoin(1, coins, 0, n - 1);
+    delete[] coins;
+
+
+}
+// fiinFakeCoin function defintion
+int findFakeCoin(int coinWeight, int coins[], int s, int e) {
+    if (e - s == 0)
+        return counter;
+    else if (e - s == 1) {
+        return counter += 1;
+    }
+    else
+    {
+        int mid = s + int((e - s) / 2);
+        int sum = 0;
+        counter += 1;
+        for (int i = s; i < mid + 1; i++) {
+            sum += coins[i];
+        }
+        int expected_weight = coinWeight * (mid + 1 - s);
+        if (sum != expected_weight)
+            return findFakeCoin(coinWeight, coins, s, mid);
+        else
+            return findFakeCoin(coinWeight, coins, mid + 1, e);
+    }
+}
 // Task 6
 void task6() {}
 
