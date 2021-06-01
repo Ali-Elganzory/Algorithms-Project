@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "Task3.h"
 using namespace std;
 
 // Utilities prototype
@@ -14,6 +14,7 @@ int minimumCuts(int n);
 void task2();
 // Task 3
 void task3();
+int minimumToggles(Circle* c);
 // Task 4
 void task4();
 // Task 5
@@ -71,7 +72,58 @@ void task1()
 // Task 2
 void task2() {}
 // Task 3
-void task3() {}
+
+
+int minimumSwitches(Circle* c)
+{
+    int temp = c->f_solution;
+    Lamp* itr = c->start;
+    for (int i = 0; i < temp; i++)
+    {
+        itr->check_objective_function(c->f_solution);
+        itr = itr->after;
+    }
+
+    // if number of lamps is not divided by 3, then the optimal solution is the intitial feasible solution = number of Lamps 
+    Lamp* itr2 = c->start;
+    for (int i = 0; i < temp; i++)
+    {
+
+        if (itr2->isOn == true)
+        {
+            c->f_solution = temp;
+            break;
+        }
+        itr2 = itr2->after;
+
+    }
+    return c->f_solution;
+}
+
+
+void task3() {
+
+    cout << "_________________________________________________ iterative improvement ________________________________________________" << endl << endl;
+
+    cout << "                                                        #Task 3" << endl << endl;
+
+    cout << endl << "                 <<Objective Function: minimize number of switches needed to turn all lamps ON>>" << endl;
+    cout << endl << "               $Constraints: Each switch toggle the state of three lamps (After, current, Before)$" << endl;
+
+    cout << endl << ">>Enter number of Lamps needed: ";
+    int noLmps;
+    cin >> noLmps;
+    cout << endl << "*intitial feasible solution: " << noLmps << endl;
+
+    Circle* c = new Circle(noLmps);
+
+    for (int i = 0; i < noLmps - 3; i++)
+    {
+        c->add_lamp();
+
+    }
+    cout << endl << "~Minimum number of switches: " << minimumSwitches(c) << endl;
+}
 
 // Task 4
 int trianglesCount(int n)
