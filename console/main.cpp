@@ -156,6 +156,28 @@ void task4()
 }
 
 // Task 5
+int findFakeCoin(int coinWeight, int coins[], int s, int e) {
+    if (e - s == 0)
+        return counter;
+    else if (e - s == 1) {
+        return counter += 1;
+    }
+    else
+    {
+        int mid = s + int((e - s) / 2);
+        int sum = 0;
+        counter += 1;
+        for (int i = s; i < mid + 1; i++) {
+            sum += coins[i];
+        }
+        int expected_weight = coinWeight * (mid + 1 - s);
+        if (sum != expected_weight)
+            return findFakeCoin(coinWeight, coins, s, mid);
+        else
+            return findFakeCoin(coinWeight, coins, mid + 1, e);
+    }
+}
+
 void task5()
 {
     int n, coinWeight, fakeIndex, fakeWeight;
@@ -186,28 +208,7 @@ void task5()
 
 
 }
-// fiinFakeCoin function defintion
-int findFakeCoin(int coinWeight, int coins[], int s, int e) {
-    if (e - s == 0)
-        return counter;
-    else if (e - s == 1) {
-        return counter += 1;
-    }
-    else
-    {
-        int mid = s + int((e - s) / 2);
-        int sum = 0;
-        counter += 1;
-        for (int i = s; i < mid + 1; i++) {
-            sum += coins[i];
-        }
-        int expected_weight = coinWeight * (mid + 1 - s);
-        if (sum != expected_weight)
-            return findFakeCoin(coinWeight, coins, s, mid);
-        else
-            return findFakeCoin(coinWeight, coins, mid + 1, e);
-    }
-}
+
 // Task 6
 void task6() {}
 
