@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <iomanip>
 #include "Task3.h"
 
 using namespace std;
@@ -13,6 +15,7 @@ void task1();
 int minimumCuts(int n);
 // Task 2
 void task2();
+void dpMagicSqr(int n, bool pseudo);
 // Task 3
 void task3();
 int minimumToggles(Circle* c);
@@ -73,9 +76,64 @@ void task1()
 }
 
 // Task 2
-void task2() {}
-// Task 3
+void dpMagicSqr(int n, bool pseudo){
+    int base[3][3] = {{8,1,6},{3,5,7},{4,9,2}};
+    if(pseudo == 0){
+        if(n != 3){
+            cout << "The only table with every 3 × 3 square in it is a magic square is a 3 x 3 table!! \n"; 
+        } else{
+            for(int i = 0; i<3;i++){
+                for(int m = 0; m<3;m++){
+                    cout << setw(3) << base[i][m];
+                }
+                cout<<endl;
+            }
+        }
+    } else{
+        vector<vector<int>> result( n , vector<int> (n, 0));
+        for(int i = 0; i<3;i++){
+                for(int m = 0; m<3;m++){
+                    result[i][m] = base[i][m];
+                }
+            }
+        for(int m = 3; m < n; m++ ){ // filling in the the first three rows
+            result[0][m] = base[0][m%3];
+            result[1][m] = base[1][m%3];
+            result[2][m] = base[2][m%3];
+        }
+        for(int i = 3; i < n; i++ ){ // filling the rest of the rows in a repeating pattern of the first three rows
+            for(int m = 0; m < n; m++)
+                result[i][m] = result[i%3][m];
+        }
+        for(int i = 0; i < n; i++){
+            for(int m = 0; m < n; m++){
+                cout << setw(3) << result[i][m];
+            }
+            cout<<endl;
+        }
+    }
+}
+void task2() {
+    printDivider();
 
+    cout << "Enter the dimension n of your n*n table: \n";
+    int n, pseudo;
+    cin >> n;
+    cout << "\nIf you want the table to contain pseudo-magic squares, type 1\n";
+    cin>>pseudo;
+    if (n < 3)
+        cout << "\ntable dimensions must be higher than 2 ...";
+    else if(pseudo = 0 && n != 3)
+        cout << "\nThe only table with every 3 × 3 square in it is a magic square is a 3 x 3 table!! \n";
+    else{
+        cout << "\nYour table is generated: \n";
+        dpMagicSqr(n, pseudo);
+    }
+
+    printDivider();
+}
+
+// Task 3
 
 int minimumSwitches(Circle* c)
 {
