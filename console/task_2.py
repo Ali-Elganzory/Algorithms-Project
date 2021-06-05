@@ -1,7 +1,7 @@
 # Task algorithm
 def dpMagicSqr(n, count):
     # create an empty matrix
-    matrix = [[0 for x in range(n)]for y in range(n)]
+    matrix = [[0 for x in range(n)] for y in range(n)]
     # initialize position of 1
     i = 1
     j = 2
@@ -28,35 +28,36 @@ def dpMagicSqr(n, count):
         j = j + 1
         i = i - 1  # 1st condition
 
-    magicNum = 1 # to memoize number of Magic squares
-    for iterator in range(3, n): # building the n x n table using the generated 3*3 subproblem
-        for row in range(0, n-1): 
-            matrix[row][iterator] = matrix[row][iterator-3]
-        for col in range(0, n): 
-            matrix[iterator][col] = matrix[iterator-3][col]
+    magicNum = 1  # to memoize number of Magic squares
+    for iterator in range(3, n):  # building the n x n table using the generated 3*3 sub-problem
+        for row in range(0, n - 1):
+            matrix[row][iterator] = matrix[row][iterator - 3]
+        for col in range(0, n):
+            matrix[iterator][col] = matrix[iterator - 3][col]
         for it in range(1, iterator):
-            if matrix[it][iterator-1]==5:
+            if matrix[it][iterator - 1] == 5:
                 magicNum = magicNum + 1
-            if matrix[iterator-1][it]==5 and it!=iterator-1:
+            if matrix[iterator - 1][it] == 5 and it != iterator - 1:
                 magicNum = magicNum + 1
     for row in range(0, n):
-        for col in range(0, n): 
+        for col in range(0, n):
             print(str(matrix[row][col]) + "   ", end=" ")
         print("\n")
     if count == 1:
-        print("\nThe number of possible Magic Squares in an " + str(n) + "*" + str(n) + " table is " + str(magicNum) + "\n")
+        print("\nThe number of possible Magic Squares in an " + str(n) + "*" + str(n) + " table is " + str(
+            magicNum) + "\n")
 
 
 # Take user input and call algorithm
-def task_1():
-    n = int(input("Enter the dimension n of your n*n table: ")) 
+def task_2():
+    n = int(input("Enter the dimension n of your n*n table: "))
     count = int(input("If you want the number of Magic squares, enter 1: "))
     if n < 3:
-        print("\ntable dimensions must be higher than 2 ...") 
+        print("\ntable dimensions must be higher than 2 ...")
     else:
-        print("\nYour table is generated: \n") 
+        print("\nYour table is generated: \n")
         dpMagicSqr(n, count)
-    
+
 
 if __name__ == "__main__":
-    task_1()
+    task_2()
