@@ -27,7 +27,11 @@ def minSwitches(m):
 
 #Task user input and call algorithm
 
-def Task_3():
+def task_3():
     n = int(input("Enter number of lamps: "))
 
     print (f"Minimum number of switches = {minSwitches(n)}")
+
+
+if __name__ == "__main__":
+    task_3()
