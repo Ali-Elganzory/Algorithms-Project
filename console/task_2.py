@@ -30,9 +30,9 @@ def dpMagicSqr(n, count):
 
     magicNum = 1  # to memoize number of Magic squares
     for iterator in range(3, n):  # building the n x n table using the generated 3*3 sub-problem
-        for row in range(0, n - 1):
+        for row in range(0, iterator):
             matrix[row][iterator] = matrix[row][iterator - 3]
-        for col in range(0, n):
+        for col in range(0, iterator + 1):
             matrix[iterator][col] = matrix[iterator - 3][col]
         for it in range(1, iterator):
             if matrix[it][iterator - 1] == 5:
