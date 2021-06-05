@@ -1,29 +1,23 @@
 # Task algorithm
 def dpMagicSqr(n, count):
     # create an empty matrix
-    matrix = [[0 for x in range(n)]
-                   for y in range(n)]
+    matrix = [[0 for x in range(n)]for y in range(n)]
     # initialize position of 1
     i = 1
     j = 2
-    # Fill the magic square
-    # by placing values
+    # Fill the magic square by placing values
     num = 1
     while num <= 9:
         if i == -1 and j == 3:  # 3rd condition
             j = 1
             i = 0
         else:
-            # next number goes out of
-            # right side of square
+            # next number goes out of right side of square
             if j == 3:
                 j = 0
- 
-            # next number goes
-            # out of upper side
+            # next number goes out of upper side
             if i < 0:
                 i = 2
- 
         if matrix[int(i)][int(j)]:  # 2nd condition
             j = j - 2
             i = i + 1
@@ -31,11 +25,11 @@ def dpMagicSqr(n, count):
         else:
             matrix[int(i)][int(j)] = num
             num = num + 1
- 
         j = j + 1
         i = i - 1  # 1st condition
+
     magicNum = 1 # to memoize number of Magic squares
-    for iterator in range(3, n): # building the n x n table
+    for iterator in range(3, n): # building the n x n table using the generated 3*3 subproblem
         for row in range(0, n-1): 
             matrix[row][iterator] = matrix[row][iterator-3]
         for col in range(0, n): 
