@@ -46,8 +46,6 @@ def dpMagicSqr(n, count):
     if count == 1:
         print("\nThe number of possible Magic Squares in an " + str(n) + "*" + str(n) + " table is " + str(magicNum) + "\n")
 
-    
-
 
 # Take user input and call algorithm
 def task_1():
@@ -59,8 +57,6 @@ def task_1():
         print("\nYour table is generated: \n") 
         dpMagicSqr(n, count)
     
-
-
 
 if __name__ == "__main__":
     task_1()
